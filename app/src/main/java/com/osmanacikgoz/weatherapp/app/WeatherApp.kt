@@ -1,6 +1,7 @@
 package com.osmanacikgoz.weatherapp.app
 
 import android.app.Application
+import com.osmanacikgoz.weatherapp.di.persistenceModule
 import com.osmanacikgoz.weatherapp.di.searchModule
 import com.osmanacikgoz.weatherapp.di.weatherModule
 import org.koin.android.ext.koin.androidContext
@@ -12,7 +13,10 @@ class WeatherApp:Application() {
         startKoin {
             androidContext(this@WeatherApp)
 
-            modules(listOf(searchModule, weatherModule))
+            modules(listOf(searchModule,
+                weatherModule,
+            persistenceModule
+                ))
 
         }
     }

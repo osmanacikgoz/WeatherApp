@@ -9,11 +9,11 @@ internal class RequestInterceptor:Interceptor {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url
         val url = originalUrl.newBuilder()
+            .addQueryParameter("api_key",BuildConfig.API_KEY)
             .build()
 
         val requestBuilder = originalRequest.newBuilder().url(url)
         val request = requestBuilder
-            .addHeader("Authorization","Bearer ${BuildConfig.API_KEY}")
             .build()
 
         return chain.proceed(request)
