@@ -1,22 +1,25 @@
 package com.osmanacikgoz.weatherapp.app
 
 import android.app.Application
-import com.osmanacikgoz.weatherapp.di.persistenceModule
-import com.osmanacikgoz.weatherapp.di.searchModule
-import com.osmanacikgoz.weatherapp.di.weatherModule
+import com.osmanacikgoz.weatherapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class WeatherApp:Application() {
+class WeatherApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApp)
 
-            modules(listOf(searchModule,
-                weatherModule,
-            persistenceModule
-                ))
+            modules(
+                listOf(
+                    persistenceModule,
+                    searchModule,
+                    weatherModule,
+                    repositoryModule,
+                    viewModelModule
+                )
+            )
 
         }
     }

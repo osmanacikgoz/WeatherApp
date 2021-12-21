@@ -8,7 +8,10 @@ import com.osmanacikgoz.weatherapp.model.response.SearchCityResponse
 class WeatherDataSource(
     private val weatherServices: WeatherServices,
 ) {
-    fun fetchWeather(onResult: (response: ApiResponse<SearchCityResponse>) -> Unit) {
-        this.weatherServices.getSearch().transform(onResult)
+    fun searchCity(
+        query: String,
+        onResult: (response: ApiResponse<SearchCityResponse>) -> Unit
+    ) {
+        this.weatherServices.getSearch(query).transform(onResult)
     }
 }

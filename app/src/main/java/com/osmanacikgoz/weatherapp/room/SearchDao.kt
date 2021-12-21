@@ -1,27 +1,21 @@
 package com.osmanacikgoz.weatherapp.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.osmanacikgoz.weatherapp.model.entity.SearchItemEntity
 
 @Dao
 interface SearchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSearchCity(searchCity: List<SearchItemEntity>)
+    fun insertSearchCity(searchCity: SearchItemEntity)
 
-    @Query("SELECT*FROM SearchItemEntity")
-    fun getSearchCits(): List<SearchItemEntity>
+    @Query("SELECT * FROM city")
+    fun getAllCity(): List<SearchItemEntity>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateCity(searchCity: SearchItemEntity)
-
-    @Query("SELECT * FROM SearchItemEntity WHERE localizedName = :name_")
-    fun getSpaceStation(name_: String): SearchItemEntity?
-
-    @Query("SELECT * FROM SearchItemEntity WHERE isCurrentCity = '1'")
-    fun getCurrentSpaceStation(): SearchItemEntity?
-
-    @Query("SELECT*FROM SearchItemEntity WHERE addCity='1'")
-    fun getAddCity(): List<SearchItemEntity>
+    @Query("SELECT * FROM city WHERE `key` = :key")
+    fun getCityByKey(key: String): SearchItemEntity
 
 }

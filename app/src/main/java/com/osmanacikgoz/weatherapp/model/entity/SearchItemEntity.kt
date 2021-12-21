@@ -3,28 +3,20 @@ package com.osmanacikgoz.weatherapp.model.entity
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import com.osmanacikgoz.weatherapp.model.response.SearchItem
 import kotlinx.parcelize.Parcelize
 
-@Entity
+@Entity(tableName = "city")
 @Parcelize
 data class SearchItemEntity(
-    @SerializedName("ID")
-    val id: String,
-    @SerializedName("LocalizedName")
+    val version: Int?,
     @PrimaryKey
-    val localizedName: String?,
-    @SerializedName("EnglishName")
-    val englishName: String,
-    @SerializedName("Level")
-    val level: Int,
-    @SerializedName("LocalizedType")
-    val localizedType: String,
-    @SerializedName("EnglishType")
-    val englishType: String,
-    @SerializedName("CountryID")
-    val countryID: String,
-    var addCity:Boolean = false,
-    var isCurrentCity: Boolean = false
+    val key: String = "",
+    val type: String?,
+    val rank: Int?,
+    val localizedName: String,
+    val englishName: String?,
+    val primaryPostalCode: String?,
+    val isAlias: Boolean?
 
 ) : Parcelable

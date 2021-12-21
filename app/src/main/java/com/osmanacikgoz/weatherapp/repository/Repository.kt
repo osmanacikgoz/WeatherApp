@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.data
+package com.osmanacikgoz.weatherapp.repository
 
 interface Repository {
 

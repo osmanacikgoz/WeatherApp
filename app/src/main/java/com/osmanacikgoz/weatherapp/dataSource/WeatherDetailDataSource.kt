@@ -4,7 +4,6 @@ import com.osmanacikgoz.weatherapp.api.ApiResponse
 import com.osmanacikgoz.weatherapp.api.WeatherServices
 import com.osmanacikgoz.weatherapp.api.transform
 import com.osmanacikgoz.weatherapp.model.entity.SearchItemEntity
-import com.osmanacikgoz.weatherapp.model.response.SearchCityResponse
 import com.osmanacikgoz.weatherapp.model.response.WeatherResponse
 
 class WeatherDetailDataSource(private val detailServices: WeatherServices) {

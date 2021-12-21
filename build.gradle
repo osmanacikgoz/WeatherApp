@@ -34,6 +34,8 @@ buildscript {
         timberVersion = '4.7.1'
         stethoVersion = '1.5.1'
 
+        //gifView
+        gifVersion='1.2.22'
 
     }
     dependencies {

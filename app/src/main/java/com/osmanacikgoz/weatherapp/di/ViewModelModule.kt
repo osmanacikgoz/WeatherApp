@@ -1,9 +1,9 @@
 package com.osmanacikgoz.weatherapp.di
 
-import com.osmanacikgoz.weatherapp.WeatherViewModel
+import com.osmanacikgoz.weatherapp.ui.search.SearchViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModels = module {
-viewModel { WeatherViewModel(get()) }
+val viewModelModule = module {
+    viewModel { SearchViewModel(get()) }
 }

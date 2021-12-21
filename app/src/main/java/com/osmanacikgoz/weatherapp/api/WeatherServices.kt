@@ -7,11 +7,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherServices {
-    @GET("adminareas/TR/search")
-    fun getSearch(): Call<SearchCityResponse>
+    @GET("locations/v1/cities/search")
+    fun getSearch(
+        @Query("q") city: String
+    ): Call<SearchCityResponse>
 
     @GET("locationKey")
     fun getWeather(
-        @Query("q") city: String,
+        @Query("q") city: String
     ): Call<WeatherResponse>
 }
