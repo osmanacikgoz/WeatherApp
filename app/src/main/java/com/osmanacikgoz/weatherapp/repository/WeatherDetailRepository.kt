@@ -1,12 +1,9 @@
 package com.osmanacikgoz.weatherapp.repository
 
-import androidx.lifecycle.MutableLiveData
 import com.osmanacikgoz.weatherapp.api.ApiResponse
 import com.osmanacikgoz.weatherapp.api.message
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDetailDataSource
 import com.osmanacikgoz.weatherapp.model.entity.WeatherDetail
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class WeatherDetailRepository constructor(
@@ -19,21 +16,20 @@ class WeatherDetailRepository constructor(
 
     }
 
-    suspend fun loadDetail(error: (String) -> Unit) = withContext(Dispatchers.IO) {
-        var liveData = MutableLiveData<List<WeatherDetail>>()
+    fun detailCity(onResult: (List<WeatherDetail>) -> Unit) {
+        var citiesDetail: List<WeatherDetail> = emptyList()
+        isLoading = true
 
-        weatherDetailDataSource.fetchWeatherDetail { response ->
-            isLoading = false
-            when (response) {
+        weatherDetailDataSource.fetchWeatherDetail { apiResponse ->
+            when (apiResponse) {
                 is ApiResponse.Success -> {
-                    response.data?.let { data ->
-                        data.map {
-                            liveData.postValue(data)
-                        }
+                    apiResponse.data?.let { data ->
+                        citiesDetail = data
+                        onResult.invoke(citiesDetail)
                     }
                 }
-                is ApiResponse.Failure.Error -> error(response.message())
-                is ApiResponse.Failure.Exception -> error(response.message())
+                is ApiResponse.Failure.Error -> error(apiResponse.message())
+                is ApiResponse.Failure.Exception -> error(apiResponse.message())
             }
         }
     }

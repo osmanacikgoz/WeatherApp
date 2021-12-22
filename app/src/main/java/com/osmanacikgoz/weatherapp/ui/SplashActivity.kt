@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.osmanacikgoz.weatherapp.databinding.ActivitySplashBinding
+import com.osmanacikgoz.weatherapp.ui.detail.MainActivity
 import kotlinx.coroutines.delay
 
 class SplashActivity:AppCompatActivity() {
@@ -16,7 +17,7 @@ class SplashActivity:AppCompatActivity() {
 
         lifecycleScope.launchWhenCreated {
             delay(4_000)
-            val intent = Intent(this@SplashActivity,MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

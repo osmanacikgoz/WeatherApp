@@ -12,8 +12,8 @@ interface WeatherServices {
         @Query("q") city: String
     ): Call<SearchCityResponse>
 
-    @GET("locationKey")
+    @GET("currentconditions/v1/locationKey")
     fun getWeather(
-        @Query("q") city: String
+        @Query("detail")detail:String
     ): Call<WeatherResponse>
 }

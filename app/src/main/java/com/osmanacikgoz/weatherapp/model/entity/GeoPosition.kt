@@ -12,4 +12,4 @@ data class GeoPosition(
     val longitude: Double?,
     @SerializedName("Elevation")
     val elevation: Elevation?
-):Parcelable
+) : Parcelable

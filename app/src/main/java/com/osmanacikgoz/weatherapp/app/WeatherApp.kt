@@ -14,7 +14,6 @@ class WeatherApp : Application() {
             modules(
                 listOf(
                     persistenceModule,
-                    searchModule,
                     weatherModule,
                     repositoryModule,
                     viewModelModule
