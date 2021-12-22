@@ -4,10 +4,12 @@ import com.osmanacikgoz.weatherapp.api.ApiResponse
 import com.osmanacikgoz.weatherapp.api.message
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDataSource
 import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.room.SearchDao
 import timber.log.Timber
 
 class WeatherCityRepository(
-    private val weatherDataSource: WeatherDataSource
+    private val weatherDataSource: WeatherDataSource,
+    private val searchDao: SearchDao
 ) : Repository {
 
     override var isLoading: Boolean = false
@@ -33,4 +35,15 @@ class WeatherCityRepository(
             }
         }
     }
+
+    suspend fun insertSearchCity(searchCity: SearchItem){
+        searchDao.insertSearchCity(searchCity)
+    }
+
+    suspend fun deleteFirstCity(){
+        searchDao.deleteFirstCity()
+    }
+
+    val getAllSearchedCity =  searchDao.getAllSearchedCity()
+
 }

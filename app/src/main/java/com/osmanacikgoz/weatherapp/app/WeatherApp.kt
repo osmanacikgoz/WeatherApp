@@ -10,7 +10,6 @@ class WeatherApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@WeatherApp)
-
             modules(
                 listOf(
                     persistenceModule,

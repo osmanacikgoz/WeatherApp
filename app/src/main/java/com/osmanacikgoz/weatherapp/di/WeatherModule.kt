@@ -5,6 +5,7 @@ import com.osmanacikgoz.weatherapp.api.RequestInterceptor
 import com.osmanacikgoz.weatherapp.api.WeatherServices
 import com.osmanacikgoz.weatherapp.const.Const
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDataSource
+import com.osmanacikgoz.weatherapp.dataSource.WeatherDetailDataSource
 import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -30,4 +31,5 @@ val weatherModule = module {
     single { get<Retrofit>(named("weather_retrofit")).create(WeatherServices::class.java) }
 
     single { WeatherDataSource(get()) }
+    single { WeatherDetailDataSource(get()) }
 }

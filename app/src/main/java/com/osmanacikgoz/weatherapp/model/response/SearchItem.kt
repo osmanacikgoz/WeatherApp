@@ -1,12 +1,16 @@
 package com.osmanacikgoz.weatherapp.model.response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "city")
 data class SearchItem(
     @SerializedName("Version")
     val version: Int?,
+    @PrimaryKey
     @SerializedName("Key")
-    val key: String?,
+    val key: String,
     @SerializedName("Type")
     val type: String?,
     @SerializedName("Rank")

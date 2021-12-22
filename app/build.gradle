@@ -73,6 +73,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersionLivedata"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersionViewModel"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
     //room
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -94,5 +95,8 @@ dependencies {
 
     //Gif Animation
     implementation "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+
+    //Dexter
+    implementation 'com.karumi:dexter:6.2.3'
 
 }

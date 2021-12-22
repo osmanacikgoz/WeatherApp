@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import com.osmanacikgoz.weatherapp.model.response.SearchItem
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "city")
 @Parcelize
 data class SearchItemEntity(
     val version: Int?,
