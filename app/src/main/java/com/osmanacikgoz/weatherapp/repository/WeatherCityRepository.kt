@@ -3,7 +3,7 @@ package com.osmanacikgoz.weatherapp.repository
 import com.osmanacikgoz.weatherapp.api.ApiResponse
 import com.osmanacikgoz.weatherapp.api.message
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDataSource
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.model.entity.SearchItem
 import com.osmanacikgoz.weatherapp.room.SearchDao
 import timber.log.Timber
 

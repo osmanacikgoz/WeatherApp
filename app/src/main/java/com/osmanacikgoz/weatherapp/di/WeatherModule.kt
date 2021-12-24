@@ -6,6 +6,7 @@ import com.osmanacikgoz.weatherapp.api.WeatherServices
 import com.osmanacikgoz.weatherapp.const.Const
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDataSource
 import com.osmanacikgoz.weatherapp.dataSource.WeatherDetailDataSource
+import com.osmanacikgoz.weatherapp.dataSource.WeatherGeoDataSource
 import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -32,4 +33,5 @@ val weatherModule = module {
 
     single { WeatherDataSource(get()) }
     single { WeatherDetailDataSource(get()) }
+    single { WeatherGeoDataSource(get()) }
 }

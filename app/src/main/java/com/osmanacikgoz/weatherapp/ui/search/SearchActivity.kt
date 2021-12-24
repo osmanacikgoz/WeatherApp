@@ -17,15 +17,15 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
 
     private val viewModel: SearchViewModel by viewModel()
-    private var searchAdapter: SearchAdapter?=null
+    private var searchAdapter: SearchAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
-        searchAdapter = SearchAdapter{
+        searchAdapter = SearchAdapter {
             viewModel.insertSearchCity(it)
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("locationKey", it.key.toString())
+            intent.putExtra("locationKey", it.key)
             startActivity(intent)
         }
         with(binding) {
@@ -39,7 +39,6 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
         }
-
         observeSearchCityLiveData()
     }
 
@@ -52,9 +51,6 @@ class SearchActivity : AppCompatActivity() {
                     searchAdapter?.updateData()
                     hasFixedSize()
                 }
-
-                //System.currentTimeMillis()
-                //orderby date limit 5
             }
         })
     }

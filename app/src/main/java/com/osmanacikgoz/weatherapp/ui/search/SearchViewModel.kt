@@ -3,8 +3,7 @@ package com.osmanacikgoz.weatherapp.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.osmanacikgoz.weatherapp.di.repositoryModule
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.model.entity.SearchItem
 import com.osmanacikgoz.weatherapp.repository.WeatherCityRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -74,23 +74,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginStart="36dp"
             android:layout_marginBottom="54dp"
+            android:text="Hissedilen"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Hissedilen" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvRealTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="@id/tvReal"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvReal"
             app:layout_constraintTop_toBottomOf="@id/tvReal"
             tools:text="Derece" />
 
@@ -98,21 +101,21 @@
             android:id="@+id/tvHumidityHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="54dp"
+            android:text="Nem"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Nem" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvHumidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,24 +128,83 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginEnd="36dp"
             android:layout_marginBottom="54dp"
+            android:text="Rüzgar"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Rüzgar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvWind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            app:layout_constraintEnd_toEndOf="@id/tvWindHeader"
+            app:layout_constraintStart_toStartOf="@id/tvWindHeader"
+            app:layout_constraintTop_toBottomOf="@id/tvWindHeader"
+            tools:text="Derece" />
+
+        <TextView
+            android:id="@+id/tvUVIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="54dp"
+            android:text="UV"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRealTemperature" />
+
+        <TextView
+            android:id="@+id/tvUV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            app:layout_constraintStart_toStartOf="@id/tvUVIndex"
+            app:layout_constraintTop_toBottomOf="@id/tvUVIndex"
+            tools:text="Derece" />
+
+        <TextView
+            android:id="@+id/tvPressureHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="54dp"
+            android:text="Basınç"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvWindHeader"
-            app:layout_constraintTop_toBottomOf="@id/tvWindHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvHumidity" />
+
+        <TextView
+            android:id="@+id/tvPressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            app:layout_constraintEnd_toEndOf="@id/tvPressureHeader"
+            app:layout_constraintStart_toStartOf="@id/tvPressureHeader"
+            app:layout_constraintTop_toBottomOf="@id/tvPressureHeader"
             tools:text="Derece" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

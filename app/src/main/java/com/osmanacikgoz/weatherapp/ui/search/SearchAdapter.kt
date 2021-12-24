@@ -2,17 +2,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.osmanacikgoz.weatherapp.databinding.ItemSearchResultBinding
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.model.entity.SearchItem
 
 class SearchAdapter(
     val onItemClickListener: (SearchItem) -> Unit
 ) :
     RecyclerView.Adapter<SearchAdapter.CityViewHolder>() {
     private var cities = listOf<SearchItem>()
-
-    interface CityClickListener {
-        fun onCityClicked(city: SearchItem)
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

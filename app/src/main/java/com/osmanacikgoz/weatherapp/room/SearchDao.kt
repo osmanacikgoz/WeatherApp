@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.osmanacikgoz.weatherapp.model.entity.SearchItemEntity
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.model.entity.SearchItem
 
 @Dao
 interface SearchDao {

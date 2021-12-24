@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.model.response
+package com.osmanacikgoz.weatherapp.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

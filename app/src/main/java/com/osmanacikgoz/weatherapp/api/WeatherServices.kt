@@ -1,6 +1,6 @@
 package com.osmanacikgoz.weatherapp.api
 
-import com.osmanacikgoz.weatherapp.model.TestWeather
+import com.osmanacikgoz.weatherapp.model.response.GeoPositionResponse
 import com.osmanacikgoz.weatherapp.model.response.SearchCityResponse
 import com.osmanacikgoz.weatherapp.model.response.WeatherResponse
 import retrofit2.Call
@@ -14,9 +14,13 @@ interface WeatherServices {
         @Query("q") city: String
     ): Call<SearchCityResponse>
 
-    @GET("forecasts/v1/daily/1day/{locationKey}")
+    @GET("currentconditions/v1/{locationKey}")
     fun getWeather(
-        @Path("locationKey") locationKey : String,
-        @Query("details")detail:String
-    ): Call<TestWeather>
+        @Path("locationKey") locationKey: String,
+        @Query("details") detail: String
+    ): Call<WeatherResponse>
+    @GET("locations/v1/cities/geoposition/search")
+    fun getGeoPosition(
+        @Query("q") latlang:String
+    ):Call<GeoPositionResponse>
 }

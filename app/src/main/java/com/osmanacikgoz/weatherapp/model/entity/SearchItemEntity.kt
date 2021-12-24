@@ -1,9 +1,7 @@
 package com.osmanacikgoz.weatherapp.model.entity
 
 import android.os.Parcelable
-import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

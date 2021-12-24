@@ -2,35 +2,35 @@ package com.osmanacikgoz.weatherapp.repository
 
 import com.osmanacikgoz.weatherapp.api.ApiResponse
 import com.osmanacikgoz.weatherapp.api.message
-import com.osmanacikgoz.weatherapp.dataSource.WeatherDetailDataSource
-import com.osmanacikgoz.weatherapp.model.entity.WeatherDetail
+import com.osmanacikgoz.weatherapp.dataSource.WeatherGeoDataSource
+import com.osmanacikgoz.weatherapp.model.response.GeoPositionResponse
 import timber.log.Timber
 
-class WeatherDetailRepository constructor(
-    private val weatherDetailDataSource: WeatherDetailDataSource
+class WeatherGeoRepository(
+    private val weatherGeoDataSource: WeatherGeoDataSource
 ) : Repository {
     override var isLoading: Boolean = false
 
     init {
-        Timber.d("Injection WeatherDetailRepository")
-
+        Timber.d("Injection WeatherGeoRepository")
     }
 
-    fun detailCity(locationKey: String, onResult: (List<WeatherDetail>) -> Unit) {
-        var citiesDetail: List<WeatherDetail> = emptyList()
+    fun getGeo(latLang: String, onResult: (List<GeoPositionResponse>) -> Unit) {
+        var citiesGeo: List<GeoPositionResponse> = emptyList()
         isLoading = true
 
-        weatherDetailDataSource.fetchWeatherDetail(locationKey) { apiResponse ->
+        weatherGeoDataSource.fetchGeoPosition(latLang) { apiResponse ->
             when (apiResponse) {
                 is ApiResponse.Success -> {
                     apiResponse.data?.let { data ->
-                        citiesDetail = (data)
-                        onResult.invoke(citiesDetail)
+                        citiesGeo = (listOf(data))
+                        onResult.invoke(citiesGeo)
                     }
                 }
                 is ApiResponse.Failure.Error -> error(apiResponse.message())
                 is ApiResponse.Failure.Exception -> error(apiResponse.message())
             }
+
         }
     }
 }

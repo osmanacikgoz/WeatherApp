@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.osmanacikgoz.weatherapp.model.entity.SearchItemEntity
-import com.osmanacikgoz.weatherapp.model.response.SearchItem
+import com.osmanacikgoz.weatherapp.model.entity.SearchItem
 
 @Database(
     entities = [

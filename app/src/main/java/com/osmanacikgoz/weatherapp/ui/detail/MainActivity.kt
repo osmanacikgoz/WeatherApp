@@ -16,13 +16,20 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.osmanacikgoz.weatherapp.R
 import com.osmanacikgoz.weatherapp.databinding.ActivityMainBinding
 import com.osmanacikgoz.weatherapp.ui.search.SearchActivity
+import com.osmanacikgoz.weatherapp.ui.search.SearchViewModel
 import com.osmanacikgoz.weatherapp.util.Utils
 import org.koin.android.viewmodel.ext.android.viewModel
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationListener
+import androidx.lifecycle.LifecycleOwner
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
 
+    private val viewModelCity: SearchViewModel by viewModel()
     private val viewModelDetail: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setUserPermissions()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val locationKey = intent.getStringExtra("locationKey")
-
+        setUserPermissions()
         locationKey?.let {
             viewModelDetail.weatherDetail(it)
         }
@@ -40,21 +47,36 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
+        getGeoPosition()
     }
 
     private fun weatherCityDetail(position: Int) {
+        viewModelCity.searchCitiesLiveData.observe(this, { cityName ->
+            cityName.let {
+                it[position].apply {
+                    binding.tvCityName.text = this.localizedName
+                }
+            }
+        })
+
         viewModelDetail.detailLiveData.observe(this, { cityDetail ->
             cityDetail?.let {
                 it[position].apply {
-                    binding.tvWeatherText.text = this.headline?.text
-                    binding.tvTemperature.text =
-                        this.dailyForecasts?.get(0)?.temperature?.minimum?.value.toString()
+                    binding.tvWeatherText.text = this.weatherText.toString()
+                    binding.tvTemperature.text = this.temperature?.metric?.value.toString()
                     binding.tvRealTemperature.text =
-                        this.dailyForecasts?.get(0)?.realFeelTemperature?.minimum?.value.toString()
-                    binding.tvWind.text =
-                        this.dailyForecasts?.get(0)?.day?.wind?.speed?.value.toString()
+                        this.realFeelTemperature?.metric?.value.toString()
+                    binding.tvWind.text = this.wind?.speed?.metric?.value.toString()
+                    binding.tvUV.text = this.uVIndex.toString()
+                    binding.tvPressure.text = this.pressure?.metric?.value.toString()
                 }
             }
+        })
+    }
+
+    private fun getGeoPosition(){
+        viewModelDetail.geoLiveData.observe(this, {cityGeo ->
+            viewModelDetail.weatherDetail(cityGeo[0].key.toString())
         })
     }
 
@@ -110,7 +132,8 @@ class MainActivity : AppCompatActivity() {
 
     fun getLocation() {
         Utils.getLocation(this) {
-            it?.adminArea
+            val location = it?.latitude.toString() + "," + it?.longitude
+            viewModelDetail.geoDetail(location)
         }
     }
 }
