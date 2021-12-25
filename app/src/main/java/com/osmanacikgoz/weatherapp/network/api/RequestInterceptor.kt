@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.api
+package com.osmanacikgoz.weatherapp.network.api
 
 import com.osmanacikgoz.weatherapp.BuildConfig
 import okhttp3.Interceptor

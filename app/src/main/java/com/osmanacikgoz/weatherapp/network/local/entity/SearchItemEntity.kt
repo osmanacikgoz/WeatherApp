@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.model.entity
+package com.osmanacikgoz.weatherapp.network.local.entity
 
 import android.os.Parcelable
 import androidx.room.PrimaryKey

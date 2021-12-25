@@ -1,11 +1,8 @@
-package com.osmanacikgoz.weatherapp.room
+package com.osmanacikgoz.weatherapp.network.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.osmanacikgoz.weatherapp.model.entity.SearchItemEntity
-import com.osmanacikgoz.weatherapp.model.entity.SearchItem
+import com.osmanacikgoz.weatherapp.network.local.entity.SearchItem
 
 @Database(
     entities = [

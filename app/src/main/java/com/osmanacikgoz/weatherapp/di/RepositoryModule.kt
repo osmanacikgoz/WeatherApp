@@ -1,12 +1,12 @@
 package com.osmanacikgoz.weatherapp.di
 
-import com.osmanacikgoz.weatherapp.repository.WeatherCityRepository
+import com.osmanacikgoz.weatherapp.repository.SearchRepository
 import com.osmanacikgoz.weatherapp.repository.WeatherDetailRepository
-import com.osmanacikgoz.weatherapp.repository.WeatherGeoRepository
+import com.osmanacikgoz.weatherapp.repository.MainRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { WeatherCityRepository(get(), get()) }
-    single { WeatherDetailRepository(get()) }
-    single { WeatherGeoRepository(get()) }
+    single { SearchRepository(searchClient = get(), searchDao = get()) }
+    single { WeatherDetailRepository() }
+    single { MainRepository(mainWeatherClient = get()) }
 }

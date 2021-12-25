@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.api
+package com.osmanacikgoz.weatherapp.network.api
 
 import retrofit2.Call
 import retrofit2.Callback

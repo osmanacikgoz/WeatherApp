@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.api
+package com.osmanacikgoz.weatherapp.network.api
 
 import okhttp3.ResponseBody
 import retrofit2.Response

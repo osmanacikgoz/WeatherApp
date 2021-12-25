@@ -1,4 +1,4 @@
-package com.osmanacikgoz.weatherapp.model.entity
+package com.osmanacikgoz.weatherapp.network.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,11 +16,12 @@ data class SearchItem(
     @SerializedName("Rank")
     val rank: Int?,
     @SerializedName("LocalizedName")
-    val localizedName: String,
+    val localizedName: String?,
     @SerializedName("EnglishName")
-    val englishName: String?,
+    val englishName: String? = null,
     @SerializedName("PrimaryPostalCode")
-    val primaryPostalCode: String?,
+    val primaryPostalCode: String? = null,
     @SerializedName("IsAlias")
-    val isAlias: Boolean?
+    val isAlias: Boolean? = null,
+    val createdDate: Long
 )

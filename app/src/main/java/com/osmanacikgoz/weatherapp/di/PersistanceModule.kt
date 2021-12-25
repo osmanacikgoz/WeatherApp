@@ -1,8 +1,8 @@
 package com.osmanacikgoz.weatherapp.di
 
 import androidx.room.Room
-import com.osmanacikgoz.weatherapp.const.Const
-import com.osmanacikgoz.weatherapp.room.AppDataBase
+import com.osmanacikgoz.weatherapp.base.Const
+import com.osmanacikgoz.weatherapp.network.local.AppDataBase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
