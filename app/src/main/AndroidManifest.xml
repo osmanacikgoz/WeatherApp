@@ -26,14 +26,19 @@
 
         </activity>
         <activity
-            android:name=".ui.detail.MainActivity"
+            android:name=".ui.weather_detail.WeatherDetailActivity"
             android:exported="true">
+
+        </activity>
+
+        <activity android:name=".ui.main.MainActivity">
 
         </activity>
 
         <activity
             android:name=".ui.search.SearchActivity"
             android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

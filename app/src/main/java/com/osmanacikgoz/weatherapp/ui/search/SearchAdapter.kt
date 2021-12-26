@@ -1,50 +1,62 @@
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.osmanacikgoz.weatherapp.R
+import com.osmanacikgoz.weatherapp.base.BaseViewHolder
+import com.osmanacikgoz.weatherapp.base.bindings
 import com.osmanacikgoz.weatherapp.databinding.ItemSearchResultBinding
-import com.osmanacikgoz.weatherapp.model.entity.SearchItem
+import com.osmanacikgoz.weatherapp.network.api.response.AutoCompleteSearchResponse
 
 class SearchAdapter(
-    val onItemClickListener: (SearchItem) -> Unit
-) :
-    RecyclerView.Adapter<SearchAdapter.CityViewHolder>() {
-    private var cities = listOf<SearchItem>()
+    private val onItemClickListener: (model: AutoCompleteSearchResponse.AutoCompleteSearchResponseItem, position: Int) -> Unit
+) : RecyclerView.Adapter<SearchAdapter.CityViewHolder>() {
+
+    private var cities = listOf<AutoCompleteSearchResponse.AutoCompleteSearchResponseItem>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CityViewHolder {
-        val binding: ItemSearchResultBinding =
-            ItemSearchResultBinding.inflate(
-                LayoutInflater.from(
-                    parent.context
-                ), parent, false
-            )
-        return CityViewHolder(binding)
+        return CityViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        holder.bind(cities[position])
+        holder.bind(cities[position], position, onItemClickListener)
     }
 
     override fun getItemCount() = cities.size
 
-    fun updateData() {
+    fun setData(searchItems: List<AutoCompleteSearchResponse.AutoCompleteSearchResponseItem>) {
+        this.cities = searchItems
         notifyDataSetChanged()
     }
 
-    fun setListOfCities(cities: List<SearchItem>){
-        this.cities = cities
-    }
+    class CityViewHolder(parent: ViewGroup) :
+        BaseViewHolder<AutoCompleteSearchResponse.AutoCompleteSearchResponseItem>(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_search_result,
+                parent,
+                false
+            )
+        ) {
 
-    inner class CityViewHolder(var binding: ItemSearchResultBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(city: SearchItem) {
-            binding.tvCityName.text = city.localizedName
-            binding.root.setOnClickListener {
-                city.let {
-                    onItemClickListener(city)
-                }
+        private val binding by bindings<ItemSearchResultBinding>(itemView)
+
+        override fun bind(
+            item: AutoCompleteSearchResponse.AutoCompleteSearchResponseItem,
+            position: Int,
+            setOnClickListener: (model: AutoCompleteSearchResponse.AutoCompleteSearchResponseItem, position: Int) -> Unit
+        ) {
+            with(binding) {
+                tvCityName.text = item.localizedName
+
+                itemView.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(p0: View?) {
+                        setOnClickListener.invoke(item, position)
+                    }
+
+                })
             }
         }
     }
