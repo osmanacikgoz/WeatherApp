@@ -5,6 +5,7 @@ import com.osmanacikgoz.weatherapp.network.api.client.MainWeatherClient
 import com.osmanacikgoz.weatherapp.network.api.message
 import com.osmanacikgoz.weatherapp.network.api.response.CurrentConditionsResponse
 import com.osmanacikgoz.weatherapp.network.api.response.GeopositionSearchResponse
+import com.osmanacikgoz.weatherapp.network.api.response.OneDailyForecastsResponse
 import timber.log.Timber
 
 class MainRepository(
@@ -52,4 +53,21 @@ class MainRepository(
         }
     }
 
+    fun getOneDailyForecast(
+        locationKey: String,
+        onResult: (OneDailyForecastsResponse?) -> Unit
+    ){
+        isLoading = true
+
+        mainWeatherClient.oneDailyForecast(locationKey) {apiResponse->
+            when(apiResponse) {
+                is ApiResponse.Success -> {
+                    val oneDailyForecastsResponse: OneDailyForecastsResponse? = apiResponse.data
+                    onResult(oneDailyForecastsResponse)
+                }
+                is ApiResponse.Failure.Error -> error(apiResponse.message())
+                is ApiResponse.Failure.Exception -> error(apiResponse.message())
+            }
+        }
+    }
 }

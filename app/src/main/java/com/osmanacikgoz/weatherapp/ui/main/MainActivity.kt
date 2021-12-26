@@ -22,7 +22,6 @@ import com.osmanacikgoz.weatherapp.base.extensions.showToast
 import com.osmanacikgoz.weatherapp.databinding.ActivityMainBinding
 import com.osmanacikgoz.weatherapp.ui.search.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,21 +33,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        requestLocationPermissions()
-
-        getIntentData()
         initUI()
-        setClickListeners()
-
-        observeGeoPositionLiveData()
-        observeCurrentConditionsLiveData()
     }
 
-    private fun getIntentData() {
-    }
 
     private fun initUI() {
-
+        setClickListeners()
+        requestLocationPermissions()
+        observeGeoPositionLiveData()
+        observeCurrentConditionsLiveData()
+        oneDailyForecastLiveData()
     }
 
     private fun setClickListeners() {
@@ -69,16 +63,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getCurrentConditions(locationKey: String) {
+        viewModel.getCurrentConditions(locationKey)
+        viewModel.getOneDailyForecast(locationKey)
+    }
+
     private fun observeCurrentConditionsLiveData() {
         viewModel.currentConditionsLiveData.observe(this) { currentConditions ->
-            currentConditions?.let {
-                Timber.d("")
+            with(binding) {
+                currentConditions?.let {
+                    this.tvTemperature.text = it[0].temperature.toString()
+                    this.tvWeatherText.text = it[0].weatherText.toString()
+                }
             }
         }
     }
 
-    private fun getCurrentConditions(locationKey: String) {
-        viewModel.getCurrentConditions(locationKey)
+    @SuppressLint("SetTextI18n")
+    private fun oneDailyForecastLiveData() {
+        viewModel.oneDailyForecastLiveData.observe(this) { oneDailyForecast ->
+            with(binding) {
+                oneDailyForecast?.let {
+                    this.tvDayAndNight.text =
+                        it.dailyForecasts?.get(0)?.temperature?.maximum.toString() + "/" +
+                                it.dailyForecasts?.get(0)?.temperature?.minimum.toString()
+                }
+            }
+        }
     }
 
     @SuppressLint("MissingPermission")

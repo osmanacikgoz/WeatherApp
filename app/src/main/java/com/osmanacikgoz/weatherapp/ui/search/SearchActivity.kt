@@ -1,6 +1,7 @@
 package com.osmanacikgoz.weatherapp.ui.search
 
 import SearchAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ArrayAdapter
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.osmanacikgoz.weatherapp.R
 import com.osmanacikgoz.weatherapp.base.toEntity
 import com.osmanacikgoz.weatherapp.databinding.ActivitySearchBinding
+import com.osmanacikgoz.weatherapp.ui.weather_detail.WeatherDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
@@ -43,6 +45,9 @@ class SearchActivity : AppCompatActivity() {
 
         searchAdapter = SearchAdapter { searchItem, _ ->
             viewModel.insertSearchItem(searchItem.toEntity())
+            val intent = Intent(this,WeatherDetailActivity::class.java)
+            intent.putExtra("locationKey",searchItem.key)
+            startActivity(intent)
         }
 
         observeSearchCityLiveData()

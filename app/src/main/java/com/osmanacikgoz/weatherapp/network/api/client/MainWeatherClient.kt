@@ -4,6 +4,7 @@ import com.osmanacikgoz.weatherapp.network.api.ApiResponse
 import com.osmanacikgoz.weatherapp.network.api.WeatherServices
 import com.osmanacikgoz.weatherapp.network.api.response.CurrentConditionsResponse
 import com.osmanacikgoz.weatherapp.network.api.response.GeopositionSearchResponse
+import com.osmanacikgoz.weatherapp.network.api.response.OneDailyForecastsResponse
 import com.osmanacikgoz.weatherapp.network.api.transform
 
 class MainWeatherClient(
@@ -21,6 +22,13 @@ class MainWeatherClient(
         onResult: (response: ApiResponse<CurrentConditionsResponse>) -> Unit
     ) {
         this.services.getCurrentConditions(locationKey).transform(onResult)
+    }
+
+    fun oneDailyForecast(
+        locationKey: String,
+        onResult: (response: ApiResponse<OneDailyForecastsResponse>) -> Unit
+    ){
+        this.services.getOneDailyForecasts(locationKey).transform(onResult)
     }
 
 }
