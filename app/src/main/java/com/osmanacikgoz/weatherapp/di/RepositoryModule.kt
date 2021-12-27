@@ -7,6 +7,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single { SearchRepository(searchClient = get(), searchDao = get()) }
-    single { WeatherDetailRepository() }
+    single { WeatherDetailRepository(mainWeatherClient = get()) }
     single { MainRepository(mainWeatherClient = get()) }
 }

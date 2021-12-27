@@ -2,8 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_blue">
+    android:layout_height="match_parent">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/givSplash"
@@ -20,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/white"
+        android:textColor="@color/background_blue"
         android:fontFamily="sans-serif-medium"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"

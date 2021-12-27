@@ -23,12 +23,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity
-            android:name=".ui.weather_detail.WeatherDetailActivity"
-            android:exported="true">
-
         </activity>
 
         <activity android:name=".ui.main.MainActivity">
@@ -38,6 +32,11 @@
         <activity
             android:name=".ui.search.SearchActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.weather_detail.WeatherDetailActivity">
+
+        </activity>
+
 
     </application>
 

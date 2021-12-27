@@ -3,7 +3,6 @@ package com.osmanacikgoz.weatherapp.ui.search
 import SearchAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -45,9 +44,11 @@ class SearchActivity : AppCompatActivity() {
 
         searchAdapter = SearchAdapter { searchItem, _ ->
             viewModel.insertSearchItem(searchItem.toEntity())
-            val intent = Intent(this,WeatherDetailActivity::class.java)
-            intent.putExtra("locationKey",searchItem.key)
+            val intent = Intent(this, WeatherDetailActivity::class.java)
+            intent.putExtra("locationKey", searchItem.key)
+            intent.putExtra("localizedName", searchItem.localizedName)
             startActivity(intent)
+
         }
 
         observeSearchCityLiveData()

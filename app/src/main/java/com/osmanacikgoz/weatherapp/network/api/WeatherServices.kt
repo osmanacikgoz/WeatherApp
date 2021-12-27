@@ -22,7 +22,8 @@ interface WeatherServices {
 
     @GET("currentconditions/v1/{locationKey}")
     fun getCurrentConditions(
-        @Path("locationKey") locationKey: String
+        @Path("locationKey") locationKey: String,
+        @Query("language") language:String
     ): Call<CurrentConditionsResponse>
 
     @GET("locations/v1/cities/geoposition/search")

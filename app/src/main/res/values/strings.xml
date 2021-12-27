@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="permision">İzin Reddedildi</string>
+    <string name="locaiton_permision">Konum İzini Gerekiyor</string>
+    <string name="location_permision_text">Uygulamayı kullanabilmeniz için konumunuza ihtiyaç duymaktadır, İzinler -> Konuma gidip izin vermeniz gerekmektedir.</string>
+    <string name="go_settings">Ayarlara git</string>
+    <string name="celcius">°C</string>
+    <string name="highest_lowest">En Yüksel/En Düşük</string>
+    <string name="fahrenait">°F</string>
+    <string name="city_search">Şehir Ara</string>
 </resources>

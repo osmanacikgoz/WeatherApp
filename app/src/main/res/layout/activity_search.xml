@@ -11,7 +11,7 @@
             android:id="@+id/etSearch"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Şehir Ara"
+            android:hint="@string/city_search"
             app:layout_constraintBottom_toBottomOf="@+id/ivSearch"
             app:layout_constraintEnd_toStartOf="@+id/ivSearch"
             app:layout_constraintStart_toStartOf="parent"

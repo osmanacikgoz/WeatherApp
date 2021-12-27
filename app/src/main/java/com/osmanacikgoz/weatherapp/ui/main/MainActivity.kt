@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.*
 import androidx.databinding.DataBindingUtil
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -22,6 +23,8 @@ import com.osmanacikgoz.weatherapp.base.extensions.showToast
 import com.osmanacikgoz.weatherapp.databinding.ActivityMainBinding
 import com.osmanacikgoz.weatherapp.ui.search.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,9 +36,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        val localizedName = intent.getStringExtra("localizedName")
+        binding.tvWeatherText.text = localizedName
+
         initUI()
     }
-
 
     private fun initUI() {
         setClickListeners()
@@ -43,22 +48,24 @@ class MainActivity : AppCompatActivity() {
         observeGeoPositionLiveData()
         observeCurrentConditionsLiveData()
         oneDailyForecastLiveData()
+        changeBackground()
     }
 
     private fun setClickListeners() {
         with(binding) {
-
             ivSearch.setOnClickListener {
                 navigateSearchPage()
             }
-
         }
     }
 
     private fun observeGeoPositionLiveData() {
         viewModel.geoPositionLiveData.observe(this) { geoPosition ->
-            geoPosition?.key?.let {
-                getCurrentConditions(it)
+            geoPosition?.let {
+                it.key?.let { key->
+                    getCurrentConditions(key)
+                }
+                binding.tvCityName.text= it.localizedName
             }
         }
     }
@@ -72,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.currentConditionsLiveData.observe(this) { currentConditions ->
             with(binding) {
                 currentConditions?.let {
-                    this.tvTemperature.text = it[0].temperature.toString()
+                    this.tvTemperature.text = it[0].temperature?.metric?.value.toString()
                     this.tvWeatherText.text = it[0].weatherText.toString()
                 }
             }
@@ -85,10 +92,27 @@ class MainActivity : AppCompatActivity() {
             with(binding) {
                 oneDailyForecast?.let {
                     this.tvDayAndNight.text =
-                        it.dailyForecasts?.get(0)?.temperature?.maximum.toString() + "/" +
-                                it.dailyForecasts?.get(0)?.temperature?.minimum.toString()
+                        it.dailyForecasts?.get(0)?.temperature?.maximum?.value.toString() + "/" +
+                                it.dailyForecasts?.get(0)?.temperature?.minimum?.value.toString()
                 }
             }
+        }
+    }
+
+    private fun changeBackground() {
+        val constraint = binding.background
+        val calendar: Calendar = Calendar.getInstance()
+        when (calendar.get(Calendar.HOUR_OF_DAY)) {
+            in 8..18 -> {
+                constraint.setBackgroundResource(R.drawable.daytime)
+            }
+            in 18..24 -> {
+                constraint.setBackgroundResource(R.drawable.night)
+            }
+            in 0..8 -> {
+                constraint.setBackgroundResource(R.drawable.night)
+            }
+
         }
     }
 
@@ -113,6 +137,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigateSearchPage() {
         val intent = Intent(this@MainActivity, SearchActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun requestLocationPermissions() {
@@ -125,7 +150,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                    showToast("İzin Reddedildi.")
+                    showToast(getString(R.string.permision))
+                    showSettingsDialog()
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
@@ -133,16 +159,17 @@ class MainActivity : AppCompatActivity() {
                     token: PermissionToken?
                 ) {
                     token?.continuePermissionRequest()
+
                 }
             }).check()
     }
 
     private fun showSettingsDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("Konum İzini Gerekiyor")
-        builder.setMessage("Uygulamayı kullanabilmeniz için konumunuza ihtiyaç duymaktadır, İzinler -> Konuma gidip izin vermeniz gerekmektedir.")
+        builder.setTitle(getString(R.string.locaiton_permision))
+        builder.setMessage(getString(R.string.location_permision_text))
         builder.setPositiveButton(
-            "Ayarlara git"
+            getString(R.string.go_settings)
         ) { dialog, which ->
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             val uri: Uri = Uri.fromParts("package", packageName, null)

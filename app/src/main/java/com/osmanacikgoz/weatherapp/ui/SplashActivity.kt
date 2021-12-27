@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.osmanacikgoz.weatherapp.R
 import com.osmanacikgoz.weatherapp.databinding.ActivitySplashBinding
+import com.osmanacikgoz.weatherapp.ui.main.MainActivity
 import com.osmanacikgoz.weatherapp.ui.search.SearchActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
 
         lifecycleScope.launch {
             delay(4_000)
-            val intent = Intent(this@SplashActivity, SearchActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

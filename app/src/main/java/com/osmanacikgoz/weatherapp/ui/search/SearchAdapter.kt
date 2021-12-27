@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,13 +44,15 @@ class SearchAdapter(
 
         private val binding by bindings<ItemSearchResultBinding>(itemView)
 
+        @SuppressLint("SetTextI18n")
         override fun bind(
             item: AutoCompleteSearchResponse.AutoCompleteSearchResponseItem,
             position: Int,
             setOnClickListener: (model: AutoCompleteSearchResponse.AutoCompleteSearchResponseItem, position: Int) -> Unit
         ) {
             with(binding) {
-                tvCityName.text = item.localizedName
+                tvCityName.text = item.localizedName + "," + item.country?.localizedName
+
 
                 itemView.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(p0: View?) {

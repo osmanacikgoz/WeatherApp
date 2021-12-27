@@ -21,7 +21,7 @@ class MainWeatherClient(
         locationKey: String,
         onResult: (response: ApiResponse<CurrentConditionsResponse>) -> Unit
     ) {
-        this.services.getCurrentConditions(locationKey).transform(onResult)
+        this.services.getCurrentConditions(locationKey,"tr-TR").transform(onResult)
     }
 
     fun oneDailyForecast(
